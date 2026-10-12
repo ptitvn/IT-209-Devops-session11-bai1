@@ -4,7 +4,7 @@
 - Khởi tạo tệp kịch bản GitHub Actions Workflow cho dự án Java Spring Boot sử dụng Gradle.
 - Cấu hình môi trường Java JDK 17 (Temurin) và tự động chạy bài kiểm thử JUnit Test bằng Gradle Wrapper (`./gradlew test`).
 
-## 2. Cấu trúc thư mục dự án
+## 2. Cấu trúc thư mục nộp bài
 ```text
 bai1/
 ├── .github/
@@ -18,6 +18,8 @@ bai1/
 │   └── session_11/
 │       └── ex1/
 │           ├── ci.yml
+│           ├── github-actions-overview.png
+│           ├── unit-test-job-detail.png
 │           └── README.md
 ├── src/
 │   ├── main/
@@ -67,10 +69,18 @@ jobs:
         run: ./gradlew test
 ```
 
-## 4. Các bước thực hiện
-1. **Khởi tạo dự án Spring Boot Gradle** với Java 17 và các dependencies cần thiết (`spring-boot-starter-web`, `spring-boot-starter-test`).
-2. **Viết Unit Test** với Spring Boot Test & WebMvcTest (`DemoApplicationTests`, `HelloControllerTest`).
-3. **Cấu hình Gradle Wrapper** (`gradlew`, `gradlew.bat`, `gradle-wrapper.jar`).
-4. **Khởi tạo Workflow** `.github/workflows/ci.yml` kích hoạt khi push lên branch `main`.
-5. **Khởi tạo Git Repository** và đẩy mã nguồn lên GitHub repository: `https://github.com/ptitvn/IT-209-Devops-session11-bai1.git`.
-6. **Kiểm tra GitHub Actions**: Job `Run Unit Tests` được kích hoạt tự động và hoàn thành thành công (tích xanh).
+## 4. Kết quả thực thi trên GitHub Actions
+
+### 4.1. Tổng quan Workflow Run (Tích xanh thành công)
+![GitHub Actions Overview](github-actions-overview.png)
+
+### 4.2. Chi tiết Job "Run Unit Tests"
+![Job Run Unit Tests Detail](unit-test-job-detail.png)
+
+- **Trạng thái:** Success (Tích xanh)
+- **Thời gian chạy:** 52s
+- **Các bước:**
+  - `Checkout mã nguồn` (actions/checkout@v5) - Thành công
+  - `Thiết lập môi trường Java JDK 17` (actions/setup-java@v5) - Thành công
+  - `Cấp quyền cho Gradle Wrapper` (`chmod +x gradlew`) - Thành công
+  - `Thực thi JUnit Test với Gradle` (`./gradlew test`) - Thành công
